@@ -10,22 +10,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "comments")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Users {
+public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int commentId;
 
-	private String username;
-	private String userType;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String password;
-	private String phone;
-
+	private String comment;
+	private String commentLike;
+	private String commentDislike;
+	private String commentCourseId;
+	private String commentUserId;
 }

@@ -12,43 +12,45 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.codingfloor.api.payloads.UserDto;
-import com.codingfloor.api.services.UserService;
+import com.codingfloor.api.payloads.CourseDto;
+import com.codingfloor.api.services.CourseService;
+import com.codingfloor.api.utils.ApiResponse;
 
 @RestController
 public class CourseController {
 
 	@Autowired
-	private UserService userService;
+	private CourseService courseService;
 
 	@PostMapping("/course")
-	private ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
-		UserDto createUser = this.userService.createUser(userDto);
-		return new ResponseEntity<>(createUser, HttpStatus.CREATED);
+	private ResponseEntity<CourseDto> createCourse(@RequestBody CourseDto courseDto) {
+		CourseDto createCourse = this.courseService.createCourse(courseDto);
+		return new ResponseEntity<>(createCourse, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/course")
-	private ResponseEntity<Object> getAllUsers() {
-		List<UserDto> createUser = this.userService.getAllUser();
-		return new ResponseEntity<Object>(createUser, HttpStatus.OK);
+	private ResponseEntity<Object> getAllCourses() {
+		List<CourseDto> createCourse = this.courseService.getAllCourse();
+		return new ResponseEntity<Object>(createCourse, HttpStatus.OK);
 	}
 
 	@GetMapping("/course/{courseId}")
-	private ResponseEntity<Object> getUserById(@PathVariable String userId) {
-		UserDto createUser = this.userService.getUserById(Integer.parseInt(userId));
-		return new ResponseEntity<>(createUser, HttpStatus.OK);
+	private ResponseEntity<Object> getCourseById(@PathVariable String courseId) {
+		CourseDto createCourse = this.courseService.getCourseById(Integer.parseInt(courseId));
+		return new ResponseEntity<>(createCourse, HttpStatus.OK);
 	}
 
 	@PutMapping("/course/{courseId}")
-	private ResponseEntity<UserDto> updateUser(@PathVariable String userId, @RequestBody UserDto userDto) {
-		UserDto createUser = this.userService.updateUser(Integer.parseInt(userId), userDto);
-		return new ResponseEntity<>(createUser, HttpStatus.ACCEPTED);
+	private ResponseEntity<CourseDto> updateCourse(@PathVariable String courseId, @RequestBody CourseDto courseDto) {
+		CourseDto createCourse = this.courseService.updateCourse(Integer.parseInt(courseId), courseDto);
+		return new ResponseEntity<>(createCourse, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("/course/{courseId}")
-	private ResponseEntity<?> deleteUser(@PathVariable String userId) {
-		return new ResponseEntity<>(this.userService.deleteUser(Integer.parseInt(userId)), HttpStatus.GONE);
+	private ResponseEntity<?> deleteCourse(@PathVariable String courseId) {
+		this.courseService.deleteCourse(Integer.parseInt(courseId));
+		return new ResponseEntity<ApiResponse>(
+				new ApiResponse("User with ID " + courseId + " is deleted successfully.", true), HttpStatus.OK);
 	}
 
 }

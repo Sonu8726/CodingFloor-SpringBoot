@@ -16,10 +16,10 @@ import com.codingfloor.api.exceptions.ResourceNotFoundException;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepo;
+	private ModelMapper modelMapper;
 
 	@Autowired
-	private ModelMapper modelMapper;
+	private UserRepository userRepo;
 
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 		user.setLastName(userDto.getLastName());
 		user.setPhone(userDto.getPhone());
 		user.setPassword(userDto.getPassword());
-
+		user.setUserType(userDto.getUserType());
 		Users updatedUser = this.userRepo.save(user);
 		return entityToDto(updatedUser);
 	}

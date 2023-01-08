@@ -10,22 +10,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "subcategory")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Users {
+public class SubCategory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-
-	private String username;
-	private String userType;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String password;
-	private String phone;
-
+	private int subCategoryId;
+	private String subCategory;
+	private String subCategoryDescription;
+	private String categoryId;
 }
